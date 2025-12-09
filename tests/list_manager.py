@@ -2,10 +2,9 @@ my_list = []
 
 
 def initialize_list():
-    """Reset with the default initial list required by tests."""
+    """Reset the list to empty."""
     global my_list
-    my_list = ["12345", "67890", "56789"]  
-    return my_list
+    my_list = []
 
 
 def get_list():
@@ -14,30 +13,28 @@ def get_list():
 
 
 def add_to_list(item):
-    """Add an item to the list and return the updated list."""
+    """Add an item to the list."""
     my_list.append(item)
-    return my_list
 
 
 def remove_from_list(item):
-    """Remove item from the list, raise ValueError if missing."""
+    """Remove an item. Raise ValueError if missing."""
     if item not in my_list:
-        raise ValueError("Item not found in list")
+        raise ValueError("Item not found")
     my_list.remove(item)
-    return my_list
 
 
 def replace_item_in_list(item, replacement):
-    """Replace an item with another. Raise ValueError if item is not found."""
+    """Replace item with replacement. Raise ValueError if item not in list."""
     if item not in my_list:
-        raise ValueError("Item not found in list")
+        raise ValueError("Item not found")
     index = my_list.index(item)
     my_list[index] = replacement
-    return my_list
 
 
 def get_item_at_position(position):
-    """Return the item at a specific index. Raise ValueError if out of range."""
-    if position < 0 or position >= len(my_list):
+    """Return item at 1-based position. Raise ValueError if invalid."""
+    index = position - 1
+    if index < 0 or index >= len(my_list):
         raise ValueError("Invalid list index")
-    return my_list[position]
+    return my_list[index]
