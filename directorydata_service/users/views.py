@@ -1,25 +1,39 @@
-from django.shortcuts import render
-import time
-import random
-
-# Create your views here.
-from django.http import HttpResponse
+from django.http import JsonResponse
 
 MAGIC_PASSWORD = "CSE270Rocks!"
 
-headers = {
-"Cross-Origin-Opener-Policy":"unsafe-none",
-'Access-Control-Allow-Origin':'*',
-'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept'
+# Optional headers for CORS
+HEADERS = {
+    "Cross-Origin-Opener-Policy": "unsafe-none",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
 }
 
-def index(request):        
-    print(request.GET.get("password"))
-    if (request.GET.get("password")==MAGIC_PASSWORD or (request.GET.get("username")=="admin" and request.GET.get("password")=="qwerty")):
-        return HttpResponse(headers=headers)
+def index(request):
+    """
+    Main endpoint for validating username/password.
+    Returns 200 OK if valid, 401 if invalid.
+    """
+    username = request.GET.get("username")
+    password = request.GET.get("password")
+
+    # Valid login conditions
+    if password == MAGIC_PASSWORD or (username == "admin" and password == "qwerty"):
+        response = JsonResponse({"status": "ok"}, status=200)
     else:
-        return HttpResponse(status=401,headers=headers)
+        response = JsonResponse({"error": "unauthorized"}, status=401)
     
+    # Add headers if needed
+    for k, v in HEADERS.items():
+        response[k] = v
+    
+    return response
+
 def ingest(request):
-    print(request.GET)
-    return HttpResponse(headers=headers)
+    """
+    Simple ingest endpoint for testing. Returns 200 with headers.
+    """
+    response = JsonResponse({"status": "ingested"}, status=200)
+    for k, v in HEADERS.items():
+        response[k] = v
+    return response
