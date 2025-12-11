@@ -61,17 +61,13 @@ jobs:
         DJANGO_SETTINGS_MODULE: directorydata_service.settings
         PYTHONPATH: ${{ github.workspace }}
 
-    - name: Set project root
-      run: cd $GITHUB_WORKSPACE
-
     - name: Set Python Path
-      run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+      run: echo "PYTHONPATH=$GITHUB_WORKSPACE:$GITHUB_WORKSPACE/directorydata_service" >> $GITHUB_ENV
 
     - name: Run tests
       run: python -m pytest
       env:
         DJANGO_SETTINGS_MODULE: directorydata_service.settings
-        PYTHONPATH: ${{ github.workspace }}
 
 
   analyze:
