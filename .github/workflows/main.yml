@@ -58,8 +58,11 @@ jobs:
         nohup python manage.py runserver 0.0.0.0:8000 &
       working-directory: directorydata_service
       env:
-        PYTHONPATH: ${{ github.workspace }}/directorydata_service
+        DJANGO_SETTINGS_MODULE: directorydata_service.settings
+        PYTHONPATH: ${{ github.workspace }}
 
+    - name: Set project root
+      run: cd $GITHUB_WORKSPACE
 
     - name: Set Python Path
       run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
