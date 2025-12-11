@@ -55,15 +55,14 @@ jobs:
 
     - name: Start Django server
       run: |
+        cd directorydata_service
         nohup python manage.py runserver 0.0.0.0:8000 &
-      working-directory: directorydata_service
       env:
-        PYTHONPATH: ${{ github.workspace }}/directorydata_service
+        PYTHONPATH: .
 
 
     - name: Run tests
       run: |
-        export DJANGO_SETTINGS_MODULE=directorydata_service.directorydata_service.settings
         pytest
 
   analyze:
