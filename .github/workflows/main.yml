@@ -62,9 +62,10 @@ jobs:
 
 
     - name: Run tests
+      env:
+        DJANGO_SETTINGS_MODULE: directorydata_service.settings
+        PYTHONPATH: ${{ github.workspace }}
       run: |
-        export DJANGO_SETTINGS_MODULE=directorydata_service.settings
-        export PYTHONPATH=$(pwd)/directorydata_service
         python -m pytest
 
   analyze:
