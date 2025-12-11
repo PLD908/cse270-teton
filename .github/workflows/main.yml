@@ -63,9 +63,9 @@ jobs:
 
     - name: Run tests
       run: |
-        export DJANGO_SETTINGS_MODULE=directorydata_service.directorydata_service.settings
+        export DJANGO_SETTINGS_MODULE=directorydata_service.settings
         export PYTHONPATH=$(pwd)/directorydata_service
-        pytest
+        python -m pytest
 
   analyze:
     needs: build
