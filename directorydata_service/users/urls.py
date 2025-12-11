@@ -1,8 +1,7 @@
 from django.urls import path
-
 from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("ingest", views.ingest, name="ingest")
+    path("ingest", views.ingest, name="ingest"),
 ]
