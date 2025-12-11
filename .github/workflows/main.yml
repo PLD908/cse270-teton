@@ -54,11 +54,11 @@ jobs:
           ["index.html", "index.htm"]    
 
     - name: Start Django server
-    run: |
-      cd directorydata_service
-      nohup python manage.py runserver 0.0.0.0:8000 &
-    env:
-      PYTHONPATH: .
+      run: |
+        cd directorydata_service
+        nohup python manage.py runserver 0.0.0.0:8000 &
+      env:
+        PYTHONPATH: .
 
 
     - name: Run tests
